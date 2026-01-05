@@ -2,39 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Metiers System</title>
+<title>Leaderboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="topbar">
   <div class="logo">METIERS</div>
-  <div class="nav-links">
-    <button onclick="showPage('factions')">Factions</button>
-    <button onclick="showPage('leaderboard')">Rankings</button>
-    <button onclick="showPage('service')">Request Service</button>
-  </div>
+  <input id="search" placeholder="Search...">
 </nav>
 
-<div class="ad-banner" onclick="showPage('service')">
-  <span>📢 Need a website, bot or docs? Click here to request a service</span>
-</div>
-
 <main>
-  <section id="factions" class="page"></section>
-  <section id="leaderboard" class="page hidden"></section>
-
-  <section id="service" class="page hidden">
-    <h2>Request Service</h2>
-    <form id="requestForm">
-      <input required name="username" placeholder="Username*">
-      <input name="faction" placeholder="Faction Represented">
-      <input required name="requestType" placeholder="Request Type (Website / Bot / Docs)*">
-      <textarea required name="description" placeholder="Description*"></textarea>
-      <input type="number" required name="budget" placeholder="Budget (Credits)*">
-      <button type="submit">Submit Request</button>
-    </form>
-    <p id="formStatus"></p>
-  </section>
+  <section id="leaderboard"></section>
 </main>
 
 <script src="script.js"></script>

@@ -1,63 +1,31 @@
-const DISCORD_WEBHOOK_URL = "PUT_YOUR_WEBHOOK_URL_HERE";
 
-async function loadFactions() {
-  const data = await fetch('data/factions.json').then(r=>r.json());
-  const el = document.getElementById('factions');
-  el.innerHTML = '<h2>Factions</h2>';
-  data.forEach(f => {
-    el.innerHTML += `
-      <div class="card">
-        <img src="${f.logo}">
-        <div>
-          <strong>${f.name}</strong>
-          <div>${f.members.length} members</div>
-        </div>
-      </div>`;
+const icons = { CMT:'assets/icons/cmt.png', CTR:'assets/icons/ctr.png', JAT:'assets/icons/jat.png' };
+let data=[];
+function cls(i){return i===0?'gold':i===1?'silver':i===2?'bronze':'';}
+async function load(){
+  data = await fetch('data/leaderboard.json').then(r=>r.json());
+  render(data);
+}
+function render(d){
+  const el=document.getElementById('leaderboard');
+  el.innerHTML='<div class="section-title">Leaderboard</div>';
+  d.forEach((u,i)=>{
+    el.innerHTML+=`
+    <div class="lb-row ${cls(i)}">
+      <div class="rank">${i+1}</div>
+      <img class="avatar" src="${u.avatar}">
+      <div class="info">
+        <div class="username">${u.username}</div>
+        <div class="subtitle">${u.title}</div>
+      </div>
+      <div class="badges">
+        ${u.badges.map(b=>`<div class="badge"><img src="${icons[b.type]}">${b.type} ${b.tier}</div>`).join('')}
+      </div>
+    </div>`;
   });
 }
-
-async function loadLeaderboard() {
-  const data = await fetch('data/leaderboard.json').then(r=>r.json());
-  const el = document.getElementById('leaderboard');
-  el.innerHTML = '<h2>Rankings</h2>';
-  data.forEach((u,i) => {
-    el.innerHTML += `
-      <div class="card">
-        <strong>#${i+1}</strong>
-        <img src="${u.avatar}">
-        <div>
-          <div>${u.username}</div>
-          <div>${u.specialty}</div>
-          <div>${u.ranks.map(r=>`<span class="badge">${r}</span>`).join('')}</div>
-        </div>
-      </div>`;
-  });
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{
-  loadFactions(); loadLeaderboard();
-
-  document.getElementById('requestForm').onsubmit = async e => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    await fetch(DISCORD_WEBHOOK_URL, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        content:`**New Service Request**
-User: ${data.username}
-Faction: ${data.faction||'None'}
-Type: ${data.requestType}
-Budget: ${data.budget}
-${data.description}`
-      })
-    });
-    document.getElementById('formStatus').innerText = "Request sent successfully.";
-    e.target.reset();
-  }
-});
-
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-}
+document.getElementById('search').oninput=e=>{
+  const q=e.target.value.toLowerCase();
+  render(data.filter(u=>u.username.toLowerCase().includes(q)));
+};
+load();
