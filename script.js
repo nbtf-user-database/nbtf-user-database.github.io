@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1457786468771823776/lW92xFa56RzKHBY1FIsiFUoBWuA89JQXN364mhPD2_zw5cbfFI-IXlD-Y8tvx3Stpusp";
+>>>>>>> 570822bcf885da30c37d697ce1d12baa29b90c34
 
 const icons = { CMT:'assets/icons/cmt.png', CTR:'assets/icons/ctr.png', JAT:'assets/icons/jat.png' };
 let data=[];
