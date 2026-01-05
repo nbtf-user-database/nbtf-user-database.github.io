@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faction System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left">Faction System</div>
+    <div class="nav-right">
+      <button onclick="showPage('factions')">Factions</button>
+      <button onclick="showPage('leaderboard')">Leaderboard</button>
+      <button onclick="showPage('service')">Request Service</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="factions" class="page"></section>
+    <section id="leaderboard" class="page hidden"></section>
+
+    <section id="service" class="page hidden">
+      <h2>Request Service</h2>
+      <form id="requestForm">
+        <label>Username*<input required name="username"></label>
+        <label>Faction Represented<input name="faction"></label>
+        <label>Request (Website / Bot / Documents)*<input required name="requestType"></label>
+        <label>Description*<textarea required name="description"></textarea></label>
+        <label>Budget (Credits)*<input type="number" required name="budget"></label>
+        <button type="submit">Submit Request</button>
+      </form>
+      <p id="formStatus"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

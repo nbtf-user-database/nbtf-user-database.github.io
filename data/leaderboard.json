@@ -1,0 +1,8 @@
+[
+  {
+    "username": "Alpha",
+    "specialty": "Assault",
+    "avatar": "assets/user1.png",
+    "ranks": ["Combat IV", "Combat Master I"]
+  }
+]
