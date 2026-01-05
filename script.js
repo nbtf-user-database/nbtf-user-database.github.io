@@ -1,4 +1,4 @@
-const DISCORD_WEBHOOK_URL = "PUT_YOUR_WEBHOOK_URL_HERE";
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1457786468771823776/lW92xFa56RzKHBY1FIsiFUoBWuA89JQXN364mhPD2_zw5cbfFI-IXlD-Y8tvx3Stpusp";
 
 async function loadFactions() {
   const data = await fetch('data/factions.json').then(r=>r.json());
