@@ -1,35 +1,55 @@
-<<<<<<< HEAD
-=======
-const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1457786468771823776/lW92xFa56RzKHBY1FIsiFUoBWuA89JQXN364mhPD2_zw5cbfFI-IXlD-Y8tvx3Stpusp";
->>>>>>> 570822bcf885da30c37d697ce1d12baa29b90c34
-
-const icons = { CMT:'assets/icons/cmt.png', CTR:'assets/icons/ctr.png', JAT:'assets/icons/jat.png' };
-let data=[];
-function cls(i){return i===0?'gold':i===1?'silver':i===2?'bronze':'';}
-async function load(){
-  data = await fetch('data/leaderboard.json').then(r=>r.json());
-  render(data);
-}
-function render(d){
-  const el=document.getElementById('leaderboard');
-  el.innerHTML='<div class="section-title">Leaderboard</div>';
-  d.forEach((u,i)=>{
-    el.innerHTML+=`
-    <div class="lb-row ${cls(i)}">
-      <div class="rank">${i+1}</div>
-      <img class="avatar" src="${u.avatar}">
-      <div class="info">
-        <div class="username">${u.username}</div>
-        <div class="subtitle">${u.title}</div>
-      </div>
-      <div class="badges">
-        ${u.badges.map(b=>`<div class="badge"><img src="${icons[b.type]}">${b.type} ${b.tier}</div>`).join('')}
-      </div>
-    </div>`;
-  });
-}
-document.getElementById('search').oninput=e=>{
-  const q=e.target.value.toLowerCase();
-  render(data.filter(u=>u.username.toLowerCase().includes(q)));
+const points = {
+  LT1: 100,
+  LT2: 200,
+  LT3: 300,
+  HT1: 150,
+  HT2: 300,
+  HT3: 450
 };
-load();
+
+function getTier(total) {
+  if (total >= 1800) return ["tiers/combat_ace.webp", "Combat Ace"];
+  if (total >= 1000) return ["tiers/combat_grandmaster.webp", "Combat Grandmaster"];
+  return ["tiers/combat_master.webp", "Combat Master"];
+}
+
+const leaderboard = document.getElementById("leaderboard");
+
+users.forEach((user, index) => {
+  const total = user.categories.reduce(
+    (a, c) => a + (points[c.level] || 0), 0
+  );
+
+  const [icon, tierName] = getTier(total);
+
+  const card = document.createElement("div");
+  card.className = "entry";
+
+  card.innerHTML = `
+    <img class="shimmer" src="${user.shimmer}">
+    <div class="rank">#${index + 1}</div>
+
+    <img class="avatar" src="${user.avatar}">
+
+    <div class="info">
+      <div class="username">${user.username}</div>
+      <div class="tier">
+        <img src="${icon}">
+        ${tierName} • ${total} pts
+      </div>
+    </div>
+
+    <div class="badges">
+      ${user.categories.map(c => `
+        <div class="medal">
+          <div class="medal-circle">
+            <img src="${c.icon}">
+          </div>
+          <div class="medal-rank">${c.level}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  leaderboard.appendChild(card);
+});

@@ -1,20 +1,141 @@
+body {
+  margin: 0;
+  background: #161616;
+  font-family: Inter, sans-serif;
+  color: white;
+}
 
-body {margin:0;font-family:Inter,Arial,sans-serif;background:#05070d;color:#e5e7eb;}
-.topbar {display:flex;gap:20px;padding:16px 24px;background:#0b1020;}
-.logo {font-size:22px;font-weight:800;}
-#search {flex:1;background:#020617;border:1px solid #1e293b;border-radius:10px;padding:10px;color:white;}
-.section-title {margin:20px;font-size:20px;font-weight:700;}
-.lb-row {position:relative;display:flex;align-items:center;margin:14px 20px;height:72px;background:#0f172a;}
-.lb-row::before {content:'';position:absolute;left:0;top:0;width:160px;height:100%;background:inherit;
-clip-path:polygon(0 0,100% 0,85% 50%,100% 100%,0 100%);}
-.lb-row.gold {background:linear-gradient(90deg,#2a1c00,#0f172a);}
-.lb-row.silver {background:linear-gradient(90deg,#1f2933,#0f172a);}
-.lb-row.bronze {background:linear-gradient(90deg,#2a160a,#0f172a);}
-.rank {width:40px;text-align:center;font-weight:800;z-index:2;}
-.avatar {width:44px;height:44px;border-radius:10px;margin-right:12px;z-index:2;}
-.info {z-index:2;}
-.username {font-weight:700;}
-.subtitle {font-size:12px;color:#9ca3af;}
-.badges {margin-left:auto;display:flex;gap:10px;padding-right:20px;z-index:2;}
-.badge {background:#020617;border-radius:12px;padding:6px 8px;font-size:11px;text-align:center;}
-.badge img {width:22px;height:22px;display:block;margin:auto;}
+/* LEADERBOARD CONTAINER */
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;                 /* extremely tight */
+  padding: 14px;
+}
+
+/* PLAYER ENTRY */
+.entry {
+  position: relative;
+  background: #222;
+  border-radius: 10px;
+
+  /* VERY small padding */
+  padding: 6px 14px 6px 230px;
+
+  display: flex;
+  align-items: center;
+
+  /* VERY small row height */
+  min-height: 76px;
+
+  overflow: hidden;
+}
+
+/* SHIMMER (unchanged size) */
+.shimmer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  object-fit: cover;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* RANK */
+.rank {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  font-family: Orbitron, sans-serif;
+  font-size: 31px;
+  font-style: italic;
+  opacity: 0.75;
+  z-index: 2;
+}
+
+/* AVATAR (bottom-left, smaller) */
+.avatar {
+  position: absolute;
+  left: 90px;
+  bottom: 0px;
+
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+
+  z-index: 2;
+}
+
+/* INFO BLOCK (username stays same logic) */
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 10px;
+}
+
+/* USERNAME */
+.username {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.25px;
+}
+
+/* TIER INFO */
+.tier {
+  font-size: 14px;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-style: italic;
+}
+
+.tier img {
+  width: 14px;
+  height: 14px;
+}
+
+/* MEDALS */
+.badges {
+  display: flex;
+  gap: 7px;
+}
+
+/* MEDAL */
+.medal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Orbitron, sans-serif;
+  font-style: italic;
+}
+
+/* MEDAL CIRCLE */
+.medal-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2d2d2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.medal-circle img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+/* MEDAL LABEL */
+.medal-rank {
+  margin-top: 2px;
+  font-size: 9px;
+  color: #bbb;
+}
