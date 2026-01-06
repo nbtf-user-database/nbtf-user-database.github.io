@@ -36,7 +36,7 @@ const users = [
       { level: "LT1", icon: "medals/sniper.png" },
       { level: "HT2", icon: "medals/shotgun.png" }
     ]
-  }
+  },
   
      {
     username: "PlayerFour",
